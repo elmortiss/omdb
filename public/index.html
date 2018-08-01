@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <title>OMDb - Movies, Series, Episodes</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">OMDb APP</a>
+    </nav>
+    <main>
+        <div class="search-form-container py-3">
+            <div class="container">
+                <div class="row">
+                        <form name="search_form" class="col align-self-center">
+                            <div class="form-group">
+                                <label for="title">Search</label>
+                                <input type="text" name="title" placeholder="Enter title" id="title">
+                                <span class="error-message">This field is required</span>
+                
+                                <button class="btn btn-primary" id="search">Search <i class="fas fa-address-book"></i></button>
+                                <div>
+                                        <input type="radio" name="radio" id="movie" value="movie" >
+                                        <label for="radio">Movie</label>
+                                        <input type="radio" name="radio" id="series" value="series" >
+                                        <label for="radio">Series</label>
+                                        <input type="radio" name="radio" id="episode" value="episode">
+                                        <label for="radio">Episode</label>
+                                        <input type="radio" name="radio" id="" value="">
+                                        <label for="radio">All</label>
+                                        </div>
+                            </div>
+                            
+                        </form>
+                </div>
+            </div>
+        </div>
+        
+            
+                <div class="result" id="card">
+                <div class="row"  ></div>
+            
+        </div>
+    </main>
+    <script src='dist/main.js'></script>
+</body>
+</html>
