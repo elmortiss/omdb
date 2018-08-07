@@ -4,24 +4,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
    
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <title>OMDb - Movies, Series, Episodes</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">OMDb APP</a>
-    </nav>
     <main>
-        <div class="search-form-container py-3">
-            <div class="container">
-                <div class="row">
-                        <form name="search_form" class="col align-self-center">
-                            <div class="form-group">
-                                <label for="title">Search</label>
-                                <input type="text" name="title" placeholder="Enter title" id="title">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">OMDb APP</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+                        <div class="jumbotron jumbotron-fluid">
+                            <h3 class="text-center">Search For Any Movie</h3>
+                            <form  name="search_form">
+                                <div class="container">
+                                <div class="search_area">
+                                <input type="text" name="title" id="title"class="form-control" placeholder="Search Movies...">
                                 <span class="error-message">This field is required</span>
-                
-                                <button class="btn btn-primary" id="search">Search <i class="fas fa-address-book"></i></button>
+                                <button class="btn btn-primary" id="search">Search</button>
+                                </div>
+                            
                                 <div>
                                         <input type="radio" name="radio" id="movie" value="movie" >
                                         <label for="radio">Movie</label>
@@ -32,19 +36,22 @@
                                         <input type="radio" name="radio" id="" value="">
                                         <label for="radio">All</label>
                                         </div>
+                                        <select name="page">
+                                                <option value="1">1</option>
+            
+                                            </select>
                             </div>
-                            
-                        </form>
-                </div>
-            </div>
-        </div>
+                        </div>
+                            </form>
+
+                            <div class="result" id="card">
+                                    <div class="row"  ></div>
+                                
+                            </div>
+                            <div id="movie-details" class="visible" tabindex="-1" role="dialog" ></div>
+                        </div>
         
-            
-                <div class="result" id="card">
-                <div class="row"  ></div>
-            
-        </div>
-    </main>
+    </main>  
     <script src='dist/main.js'></script>
 </body>
 </html>
