@@ -6,24 +6,26 @@
    
     <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  
     <title>OMDb - Movies, Series, Episodes</title>
 </head>
 <body>
-    <main>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">OMDb APP</a>
+                <a class="navbar-brand" href="#"><img src="http://www.coloroffilm.com/wp-content/themes/berlin2/images/tcof-logo.png" style="width:100px;">
+                    OMDb APP</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
             </nav>
-                        <div class="jumbotron jumbotron-fluid">
+ <main>                  
+            <div class="jumbotron jumbotron-fluid">
                             <h3 class="text-center">Search For Any Movie</h3>
                             <form  name="search_form">
                                 <div class="container">
                                 <div class="search_area">
                                 <input type="text" name="title" id="title"class="form-control" placeholder="Search Movies...">
                                 <span class="error-message">This field is required</span>
-                                <button class="btn btn-primary" id="search">Search</button>
+                                <button class="btn btn-primary" id="search"><i class="fa fa-search"></i>Search</button>
                                 </div>
                             
                                 <div>
@@ -36,22 +38,24 @@
                                         <input type="radio" name="radio" id="" value="">
                                         <label for="radio">All</label>
                                         </div>
-                                        <select name="page">
-                                                <option value="1">1</option>
-            
-                                            </select>
+                                        <select  name="page" >
+                                            <option value = '1' name="page">1</option>
+                                        </select>
                             </div>
-                        </div>
+                       
                             </form>
 
-                            <div class="result" id="card">
-                                    <div class="row"  ></div>
-                                
-                            </div>
-                            <div id="movie-details" class="visible" tabindex="-1" role="dialog" ></div>
+                        </div> 
                         </div>
-        
-    </main>  
+
+                        <div class="result" id="card">
+                                <div class="row"  ></div>
+                            
+                        </div>
+                        <div id="movie-details" class="">
+                                <span class="close"></span>
+                             </div>
+                            </main>            
     <script src='dist/main.js'></script>
 </body>
 </html>
