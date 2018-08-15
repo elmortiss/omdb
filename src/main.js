@@ -1,19 +1,21 @@
 const API_KEY = 'fd58e48d';
 const URL = `http://www.omdbapi.com/?apikey=${API_KEY}`;
 const form = document.forms.search_form;
+let page = 1;
+const quant = 10;
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = form.title.value.trim();
     const movieType = form.radio.value;
-    const currentPage = form.page.value;
+    page = 1;
    
     if (!value) {
         form.title.classList.add('error');
         setVisibility(form.querySelector('.error-message'), true);
     } else {
-        fetch(`${URL}&s=${value}&type=${movieType}&page=${currentPage}`)
-            .then(response => response.json())
+        fetch(`${URL}&s=${value}&type=${movieType}&page=${page}`)
+            .then(response => response.json())  
             .then(data => generateResultCards(data))
         form.title.classList.remove('error');
         setVisibility(form.querySelector('.error-message'), false);
@@ -28,6 +30,7 @@ function setVisibility(element, isVisible) {
 }
 function generateResultCards(data) {
     const search = data.Search;
+    const total = data.totalResults;
     const  result = search.map(item => 
           `
           <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -35,34 +38,32 @@ function generateResultCards(data) {
                     <div class="card-body">
                     <h5 class="card-title">${item.Title}</h5>
                     <p class="card-text">${item.Type}</p>
-                    <button type="button" class="btn btn-primary more-info" data-toggle="modal" data-target="#movie-details" data-imdbID="${item.imdbID}">More info</button>
+                    <button type="button" class="btn btn-primary more-info" data-toggle="modal" data-target="#movie_details" data-imdbID="${item.imdbID}">More info</button>
                     </div>
               </div>
     `).join('');
-    
    document.querySelector('#card.result').innerHTML = result;
-   initMoreInfoEventListeners()
-   let optionElements = [];
-    for(var i=1; i<item.totalResults/10; i++){
-      optionElements.concat(`<option value = ${i} name="page">Page${i}</option>`)
-    }
-    selectElement.innerHTML = optionElements;
+
+   renderPagination(total)
+   initMoreInfoEventListeners();
+
    
 }
 
+
 function initMoreInfoEventListeners(){
     var buttons = document.querySelectorAll('.more-info');
-    console.log(buttons)
     for (var i=0; i <= buttons.length; i++){
     var button = buttons[i];
     button && button.addEventListener('click', (event) => {
         event.preventDefault();
         const imdbID = event.target.getAttribute('data-imdbID');
-      fetch(`${URL}&i=${imdbID}`)
+      fetch(`${URL}&i=${imdbID}&plot=full`)
   .then(response => response.json())
-  .then(data => showMovieDetails(data))
+  .then(data => showMovieDetails(data));
       
 })}}
+
 
 
 function showMovieDetails(data){
@@ -95,27 +96,51 @@ function showMovieDetails(data){
   </div>
   
  `
-   document.querySelector('#movie-details').innerHTML = movieDetailsHtml; 
- 
-   
-   
-    
-  }
-
-  
-
-   
-  
- 
-
+ document.querySelector('#movie_details').innerHTML = movieDetailsHtml; 
 
  
 
+    }
 
-/* localStorage.setItem("favorites", JSON.stringify(['tt0076759', 'tt0080684' ]));
-favorites = JSON.parse(localStorage.getItem("favorites"));
-addToFavorites(id){}
-removeFromFavorites(id){}
-renderFavoritesCounter(){
-  return `<div>${len(localStorage.getItem("favorites"))}</div>`;
-};*/
+
+    function renderPagination(total) {
+        let pageQ = Math.ceil(total/quant);
+        const pageButtonsArray = [];
+        
+        for (let i = 1; i <= pageQ; i++) {
+            pageButtonsArray.push(`<li class="page-item"><a class="page-link" href="${i}">${i}</a></li>`)
+        }
+        const resultString = `
+
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+               
+                ${pageButtonsArray.join('')}
+            
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>`;
+        paginationContainer.innerHTML = resultString;
+        paginationContainer.querySelectorAll('li a').forEach((item) => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                const index = item.getAttribute('href');
+                page = index;
+                
+                
+            });
+        });    
+    }    
+
+
+   
